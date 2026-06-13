@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To-Do App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>📝 Task Manager</h1>
+    <p>Stay organised — manage your tasks easily</p>
+    <div class="stats-row">
+      <div class="stat-box"><div class="num" id="sTotal">0</div><div class="lbl">Total</div></div>
+      <div class="stat-box"><div class="num" id="sPending">0</div><div class="lbl">Pending</div></div>
+      <div class="stat-box"><div class="num" id="sDone">0</div><div class="lbl">Done</div></div>
+      <div class="stat-box"><div class="num" id="sHigh">0</div><div class="lbl">High</div></div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Overall Progress</span>
+      <span id="progressPct">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  </div>
+]
+  <div class="form-card">
+    <h3 id="formHeading">Add New Task</h3>
+    <input type="hidden" id="editId"/>
+    <div class="form-grid">
+      <div class="field full">
+        <label>Task Title *</label>
+        <input type="text" id="taskTitle" placeholder="What do you need to do?"/>
+      </div>
+      <div class="field full">
+        <label>Notes (optional)</label>
+        <textarea id="taskNote" placeholder="Add some details..."></textarea>
+      </div>
+      <div class="field">
+        <label>Priority</label>
+        <select id="taskPriority">
+          <option>Low</option>
+          <option selected>Medium</option>
+          <option>High</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Category</label>
+        <select id="taskCategory">
+          <option>General</option>
+          <option>Work</option>
+          <option>Study</option>
+          <option>Personal</option>
+          <option>Health</option>
+          <option>Shopping</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Due Date</label>
+        <input type="date" id="taskDue"/>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn-add" id="submitBtn" onclick="submitForm()">+ Add Task</button>
+      <button class="btn-clear" onclick="clearForm()">Clear</button>
+    </div>
+    <div class="err-msg" id="errMsg">⚠ Please enter a task title.</div>
+  </div>
+
+  <div class="toolbar">
+    <div class="search-wrap">
+      <span class="s-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search tasks..." oninput="renderTasks()"/>
+    </div>
+    <select id="filterPriority" onchange="renderTasks()">
+      <option value="All">All Priorities</option>
+      <option value="Low">Low</option>
+      <option value="Medium">Medium</option>
+      <option value="High">High</option>
+    </select>
+    <select id="filterCategory" onchange="renderTasks()">
+      <option value="All">All Categories</option>
+      <option>General</option>
+      <option>Work</option>
+      <option>Study</option>
+      <option>Personal</option>
+      <option>Health</option>
+      <option>Shopping</option>
+    </select>
+    <select id="sortBy" onchange="renderTasks()">
+      <option value="newest">Newest First</option>
+      <option value="oldest">Oldest First</option>
+      <option value="priority">By Priority</option>
+      <option value="due">By Due Date</option>
+    </select>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="setTab('all',this)">All</button>
+    <button class="tab" onclick="setTab('pending',this)">Pending</button>
+    <button class="tab" onclick="setTab('done',this)">Completed</button>
+  </div>
+
+  <div id="taskList"></div>
+
+</div>
+
+<div id="toast"></div>
+
+<script rel ="script" href="script.js"></script>
+</body>
+</html>
